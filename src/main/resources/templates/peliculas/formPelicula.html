@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Aplicación de gestión de peliculas</title>
+    <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
+</head>
+<body>
+
+<div class="container py-4">
+    <h2 th:text="${titulo}"
+        class="text-secondary border border-success border-top-0 border-left-0 border-right-0"></h2>
+    <div class="card bg-light">
+        <div class="card-body">
+            <form th:action="@{/cpeliculas/guardar/}" method="post" th:object="${pelicula}" enctype="multipart/form-data">
+                <div th:if="${#fields.hasErrors('*')}" class='alert alert-danger' role='alert'>
+                    Por favor corrija los siguientes errores:
+                    <ul>
+                        <li th:each="err : ${#fields.errors('*')}" th:text="${err}"/>
+                    </ul>
+                </div>
+                <div class="float-left">
+                    <label for="file" class="col-form-label">Imagen</label>
+                    <div >
+                        <input type="file" id="file" name="file" class="form-control"/>
+                    </div>
+                </div>
+                <ul class="list-group">
+                    <li class="list-group-item">
+                        <label for="titulo" class="form-label">Título</label>
+                        <input type="text" class="form-control" th:field="*{titulo}" id="titulo" name="titulo" required="required">
+                    </li>
+                    <li class="list-group-item">
+                        <label for="annio" class="form-label">Año</label>
+                        <input type="text" class="form-control" th:field="*{annio}" id="annio" name="annio" required="required">
+                    </li>
+                    <li class="list-group-item">
+                        <label for="duracion" class="form-label">Duración</label>
+                        <input type="number" class="form-control" th:field="*{duracion}" id="duracion" name="duracion" required="required">
+                    </li>
+                    <li class="list-group-item">
+                        <label for="pais" class="form-label">País</label>
+                        <input type="text" class="form-control" th:field="*{pais}" id="pais" name="pais" required="required">
+                    </li>
+                    <li class="list-group-item">
+                        <label for="direccion" class="form-label">Dirección</label>
+                        <input type="text" class="form-control" th:field="*{direccion}" id="direccion" name="direccion" required="required">
+                    </li>
+                    <li class="list-group-item">
+                        <label for="sinopsis" class="form-label">Sinopsis</label>
+                        <input type="text" class="form-control" th:field="*{sinopsis}" id="sinopsis" name="sinopsis" required="required">
+                    </li>
+                    <li class="list-group-item" >
+                        <div>
+                            <label for="idActor">Actores:</label>
+                            <select class="" name="idActor" id="idActor" multiple="" required>
+                                <option th:each="var : ${listadoActores}" th:value="${var.idActor}" th:text="${var.nombre}" th:selected="${pelicula.getNombresActores().contains(var.nombre)}"></option>
+                            </select>
+                        </div>
+                    </li>
+                    <li class="list-group-item" >
+                        <div class="">
+                            <label for="genero">Género:</label>
+                            <select class="form-select" th:field="*{genero}" name="genero" id="genero">
+                                <option th:value="Infantil">Infantil</option>
+                                <option th:value="Drama">Drama</option>
+                                <option th:value="Suspenso">Suspenso</option>
+                                <option th:value="Terror">Terror</option>
+                                <option th:value="Acción">Acción</option>
+                                <option th:value="Acción">Comedia</option>
+                            </select>
+                        </div>
+                    </li>
+                </ul>
+                <button type="submit" class="btn btn-primary">Guardar</button>
+                <input type="hidden" th:field="*{idPelicula}" />
+                <input type="hidden" th:field="*{imagen}"/>
+            </form>
+        </div>
+    </div>
+    <hr>
+    <a class="btn btn-secondary" role="button" href="javascript:history.back()">Volver</a>
+</div>
+
+<!-- Bootstrap core JavaScript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script th:src="@{/js/bootstrap.min.js}"></script>
+
+</body>
+</html>

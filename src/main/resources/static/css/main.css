@@ -1,0 +1,182 @@
+/* el  . se utliza para indentificar clases que pueden ser reutilizadas */
+/* se puede utilizar dos clases separadas por un espacio */
+.encabezado{
+    color: black;
+}
+.mayuscula{
+    text-transform: uppercase;
+}
+html{
+    box-sizing: border-box;
+    font-size: 62.5%; /** Reset para REMS - 62.5% = 10px de 16 px **/
+}
+/* se utliza para no agregar px a los anchos sumandole el padding*/
+*, *:before, *:after {
+    box-sizing: inherit;
+}
+body{
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 1.6rem;
+    line-height: 2;
+}
+img{
+    max-width: 30%;
+    max-height: 30%;
+}
+/************************************** Globales ***************************************************/
+.contenedor{
+    max-width: 120rem; /* equivale 1200px */
+    margin: 0 auto 0 auto;
+}
+h1{
+    font-size: 4rem;
+    text-align: center;
+}
+h2{
+    font-size: 3.4rem;
+}
+h3{
+    font-size: 3rem;
+}
+h4{
+    font-size: 2.6rem;
+}
+
+.formulario{
+
+}
+
+.campoFormulario{
+    display: grid;
+    width: 100%;
+    margin-top: 2px;
+    margin-bottom: 0px;
+}
+.campoFormulario input{
+    width: 100%;
+    border-radius: 6px;
+
+}
+/**************************************** Utilidades ***************************************************/
+.seccion{
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+}
+.fw-300{
+    font-weight: 300;
+}
+.centrar-texto{
+    text-align: center;
+}
+.d-block{
+    display: block!important; /* se utiliza para que funcione a pesar de no ser el ultimo en la hoja*/
+}
+
+.contenido-centrado{
+    max-width: 80rem;
+
+}
+
+/**************************************** Botones *******************************************************/
+
+.boton{
+    color: white;
+    font-weight: 700;
+    text-decoration: none;
+    font-size: 1.8rem;
+    padding: 1rem 3rem;
+    display: inline-block;
+    margin-top: 3rem;
+    text-align: center;
+    border: none;
+    background-color: #2A6BAD;
+    border-radius: 3rem;
+}
+
+/************************************ Header **************************************************/
+.site-header {
+    color: white;
+    padding: 1rem 0 3rem 0;
+    /*background-image: url(../img/cabecera.jpg);*/
+    background-position: center center;
+    background-size: cover;
+    height: 35rem;
+}
+
+.site-header h1 {
+    font-size: 6rem;
+}
+/********************** Opciones *******************************************************/
+.opciones{
+    display: flex;
+    justify-content: space-between;
+}
+.opcion{
+    flex-basis: calc(33.3% - 1rem);
+    text-align: center;
+    position: relative
+}
+.opcion img {
+    width:400px;
+    height:380px;
+}
+
+.opcion h3{
+    text-transform: uppercase;
+}
+/******************** Nuevo circuito *************************************************/
+.nuevoCircuito {
+    display: flex;
+    justify-content: center;
+
+}
+.nuevoCircuito form {
+    text-align: left;
+    width:400px;
+}
+.nuevoCircuito form input {
+    right: 0rem;
+}
+
+/***************** Nuevo coche *****************************************************/
+.nuevoCoche {
+    display: flex;
+    justify-content: center;
+
+}
+.nuevoCoche form {
+    text-align: left;
+    width:400px;
+}
+.nuevoCoche form input {
+    right: 0rem;
+}
+/***************** Calcular ganancia *****************************************************/
+.calcularGanancia {
+    text-align: center;
+}
+.selectDiv{
+    text-align: center;
+}
+.selectDiv select{
+    width: 50%;
+    cursor: pointer;
+    padding: 7px 10px;
+    height: 42px;
+    border-radius: 6px;
+    font-size: 1em;
+    position: relative;
+    transition: all 0.25s ease;
+    margin-top: 1rem;
+    text-align: center;
+}
+/***************** Resultado Ganancia *****************************************************/
+.resultadoGancia {
+    display: flex;
+    justify-content: center;
+    font-size: 3rem;
+    margin-top: 1rem;
+    color: #2A6BAD;
+
+
+}

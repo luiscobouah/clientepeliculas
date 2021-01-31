@@ -1,0 +1,41 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Men&uacute; Principal</title>
+    <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
+    <link th:href="@{/css/main.css}" rel="stylesheet" >
+</head>
+<body>
+    <div class="contenedor seccion">
+        <h1 class="text-center">Gestión de Películas</h1>
+        <hr>
+        <div class="card-group">
+            <div class="card">
+                <div class="card-body">
+                    <h3 class="card-title">Películas</h3>
+                    <a class="page-link" th:href="@{/cpeliculas/peliculas?origen=home}">
+                        Listado películas
+                    </a>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-body">
+                    <h3 class="card-title">Actores</h3>
+                    <a class="page-link" th:href="@{/cactores/actores?origen=home}">
+                        Listado de actores
+                    </a>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-body">
+                    <h3 class="card-title">Busquedas</h3>
+                    <a class="page-link" th:href="@{/cpeliculas/buscarPeliculas?origen=home}">
+                        Buscar películas
+                    </a>
+            </div>
+        </div>
+    </div>
+    </div>
+</body>
+</html>

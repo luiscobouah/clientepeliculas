@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Aplicación de gestión de peliculas</title>
+    <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
+</head>
+<body>
+<div class="container py-4">
+    <h2 class="text-secondary border border-success border-top-0 border-left-0 border-right-0">Búsqueda de Películas</h2>
+    <form th:action="@{/cpeliculas/titulo}" method="get">
+        <div class="mb-3">
+            <label for="titulo" class="form-label">Título</label>
+            <input type="text" class="form-control" id="titulo" name="titulo" placeholder="Escriba el título de la pelicula" required>
+        </div>
+        <button type="submit" class="btn btn-primary">Buscar por Título</button>
+        <input type="hidden" name="origen" value="buscarPeliculas" />
+    </form>
+    <hr>
+    <form th:action="@{/cpeliculas/genero}" method="get">
+        <div class="mb-3">
+            <select class="form-select" name="genero" id="genero" required>
+                <option hidden  selected>Selecciona un género</option>
+                <option th:value="Infantil">Infantil</option>
+                <option th:value="Drama">Drama</option>
+                <option th:value="Suspenso">Suspenso</option>
+                <option th:value="Terror">Terror</option>
+                <option th:value="Acción">Acción</option>
+                <option th:value="Comedia">Comedia</option>
+            </select>
+        </div>
+        <button type="submit" class="btn btn-primary">Buscar por Género</button>
+        <input type="hidden" name="origen"  value="buscarPeliculas" />
+    </form>
+    <hr>
+    <form th:action="@{/cpeliculas/actor}" method="get">
+        <div class="mb-3">
+            <select class="form-select" name="idActor" id="idActor" required>
+                <option hidden value="0" selected>Selecciona un actor</option>
+                <option th:each="var : ${listadoActores}" th:value="${var.idActor}" th:text="${var.nombre}"></option>
+            </select>
+        </div>
+        <button type="submit" class="btn btn-primary">Buscar por Actor</button>
+        <input type="hidden" name="origen" id="origen" value="buscarPeliculas" />
+    </form>
+    <hr>
+    <a class="btn btn-secondary" role="button" th:href="${origen}">Volver</a>
+</div>
+<!-- Bootstrap core JavaScript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script th:src="@{/js/bootstrap.min.js}"></script>
+
+</body>
+</html>
