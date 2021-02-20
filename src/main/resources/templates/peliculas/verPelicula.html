@@ -1,9 +1,11 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" lang="es">
+<html xmlns:th="http://www.thymeleaf.org" lang="es"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8">
     <title>Aplicación de gestión de peliculas</title>
     <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <body>
 
@@ -16,6 +18,7 @@
                  th:alt="${pelicula.imagen}" />
             <ul class="list-group">
                 <li class="list-group-item active" th:text="'ID: ' +'PE'+${pelicula.idPelicula}"></li>
+                <li class="list-group-item" th:text="'Valoración media: '+${notaMedia}"></li>
                 <li class="list-group-item" th:text="'Título: '+${pelicula.titulo}"></li>
                 <li class="list-group-item" th:text="'Año: '+${pelicula.annio}"></li>
                 <li class="list-group-item" th:text="'Duración: '+${pelicula.duracion}+' minutos'"></li>
@@ -24,11 +27,36 @@
                 <li class="list-group-item" th:text="'Género: '+${pelicula.genero}"></li>
                 <li class="list-group-item" th:text="'Actores: '+${pelicula.getNombresActores()}"></li>
                 <li class="list-group-item" th:text="'Sipnosis: '+${pelicula.sinopsis}"></li>
+                <li class="list-group-item">
+                    <table class="table table-hover">
+                        <thead class="thead-light">
+                        <tr>
+                            <th scope="col">Valoración</th>
+                            <th scope="col">Nota</th>
+                            <th scope="col">Fecha</th>
+                            <th scope="col">Acciones</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="critica : ${criticas}">
+                            <td th:text="${critica.valoracion}"></td>
+                            <td th:text="${critica.nota}"></td>
+                            <td th:text="${critica.fecha}"></td>
+                            <td>
+                                <!--<a sec:authorize="hasRole('ROLE_USER')" th:href="@{/ccriticas/editar/{id}  (id=${critica.idCritica})  }" th:text="'editar'" class="btn btn-success btn-sm" role="button" title="Editar la película."><i class="fas fa-pencil-alt" aria-hidden="true"></i></a> -->
+                                <a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/ccriticas/borrar/{id}  (id=${critica.idCritica})   }" th:text="'borrar'" onclick="return confirm('¿Estas seguro?')" class="btn btn-danger btn-sm" role="button" title="Eliminar la crítica."><i class="fas fa-trash" aria-hidden="true"></i></a>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </li>
             </ul>
+
         </div>
     </div>
     <hr>
     <a class="btn btn-secondary" role="button" href="javascript:history.back()">Volver</a>
+    <a sec:authorize="hasRole('ROLE_USER')" class="btn btn-primary" role="button" th:href="@{/ccriticas/nueva/{idPelicula}  (idPelicula=${pelicula.idPelicula})}">Nueva crítica</a>
 </div>
 
 </body>

@@ -23,7 +23,8 @@ public class PeliculasServiceImpl implements es.uah.clientepeliculas.service.IPe
     @Autowired
     IActoresService actoresService;
 
-    String url = "http://localhost:8082/peliculas";
+
+    String url = "http://localhost:8090/api/zpeliculas/peliculas";
 
     @Override
     public Page<Pelicula> buscarTodas(Pageable pageable) {

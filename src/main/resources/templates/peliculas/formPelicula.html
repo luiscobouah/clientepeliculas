@@ -8,8 +8,9 @@
 <body>
 
 <div class="container py-4">
-    <h2 th:text="${titulo}"
-        class="text-secondary border border-success border-top-0 border-left-0 border-right-0"></h2>
+    <h2 th:text="${titulo}" class="text-secondary border border-success border-top-0 border-left-0 border-right-0">
+
+    </h2>
     <div class="card bg-light">
         <div class="card-body">
             <form th:action="@{/cpeliculas/guardar/}" method="post" th:object="${pelicula}" enctype="multipart/form-data">

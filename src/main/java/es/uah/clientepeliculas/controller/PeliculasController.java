@@ -2,9 +2,11 @@ package es.uah.clientepeliculas.controller;
 
 
 import es.uah.clientepeliculas.model.Actor;
+import es.uah.clientepeliculas.model.Critica;
 import es.uah.clientepeliculas.model.Pelicula;
 import es.uah.clientepeliculas.paginator.PageRender;
 import es.uah.clientepeliculas.service.IActoresService;
+import es.uah.clientepeliculas.service.ICriticasService;
 import es.uah.clientepeliculas.service.IPeliculasService;
 import es.uah.clientepeliculas.service.IUploadFileService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,6 +39,9 @@ public class PeliculasController {
 
     @Autowired
     private IUploadFileService uploadFileService;
+
+    @Autowired
+    ICriticasService criticasService;
 
     @GetMapping("/uploads/{filename:.+}")
     public ResponseEntity<Resource> verFoto(@PathVariable String filename) {
@@ -82,6 +87,8 @@ public class PeliculasController {
         Pageable pageable = PageRequest.of(page, 5);
         Page<Pelicula> listado = peliculasService.buscarTodas(pageable);
         PageRender<Pelicula> pageRender = new PageRender<Pelicula>("/cpeliculas/peliculas", listado);
+        List<Actor> listadoActores = actoresService.buscarTodos();
+        model.addAttribute("listadoActores", listadoActores);
         model.addAttribute("titulo", "Listado de todas las películas");
         model.addAttribute("listadoPeliculas", listado);
         model.addAttribute("origen", "home");
@@ -92,7 +99,22 @@ public class PeliculasController {
     @GetMapping(value = "/ver/{id}")
     public String ver(Model model, @PathVariable("id") Integer id, RedirectAttributes attributes) {
         Pelicula pelicula = peliculasService.buscarPeliculaPorId(id);
+        Pageable pageable = PageRequest.of(0, 20);
+        List<Critica> criticas = criticasService.buscarCriticasPorIdPelicula(id);
+        Integer sumatoria = 0;
+        for (Critica critica : criticas) {
+            sumatoria = sumatoria + critica.getNota();
+        }
+        String notaMedia;
+        if (criticas.size()==0){
+            notaMedia = "";
+        } else {
+            notaMedia = String.valueOf(sumatoria/criticas.size());
+        }
+
         model.addAttribute("pelicula", pelicula);
+        model.addAttribute("criticas", criticas);
+        model.addAttribute("notaMedia", notaMedia);
         model.addAttribute("titulo", "Detalle de la pelicula: " + pelicula.getTitulo());
         return "peliculas/verPelicula";
     }
@@ -105,10 +127,13 @@ public class PeliculasController {
     }
 
     @GetMapping("/titulo")
-    public String buscarPeliculasPorTitulo(Model model, @RequestParam(name="page", defaultValue="0") int page, @RequestParam("titulo") String titulo, @RequestParam("origen") String origen) {
+    public String buscarPeliculasPorTitulo(Model model, @RequestParam(name="page", defaultValue="0") int page, @RequestParam("tituloPel") String tituloPel, @RequestParam("origen") String origen) {
         Pageable pageable = PageRequest.of(page, 5);
-        Page<Pelicula> listado = peliculasService.buscarPeliculaPorTitulo(titulo, pageable);
+        Page<Pelicula> listado = peliculasService.buscarPeliculaPorTitulo(tituloPel, pageable);
         PageRender<Pelicula> pageRender = new PageRender<Pelicula>("/cpeliculas/peliculas", listado);
+        List<Actor> listadoActores = actoresService.buscarTodos();
+        model.addAttribute("tituloPel", tituloPel);
+        model.addAttribute("listadoActores", listadoActores);
         model.addAttribute("titulo", "Listado de peliculas por titulo");
         model.addAttribute("origen", origen);
         model.addAttribute("listadoPeliculas", listado);
@@ -121,6 +146,9 @@ public class PeliculasController {
         Pageable pageable = PageRequest.of(page, 5);
         Page<Pelicula> listado = peliculasService.buscarPeliculaPorGenero(genero, pageable);
         PageRender<Pelicula> pageRender = new PageRender<Pelicula>("/cpeliculas/peliculas", listado);
+        List<Actor> listadoActores = actoresService.buscarTodos();
+        model.addAttribute("genero", genero);
+        model.addAttribute("listadoActores", listadoActores);
         model.addAttribute("titulo", "Listado de peliculas por genero");
         model.addAttribute("origen", origen);
         model.addAttribute("listadoPeliculas", listado);
@@ -135,6 +163,9 @@ public class PeliculasController {
         List<Pelicula> lista = actor.getPeliculas();
         Page<Pelicula> listado = new PageImpl<>(lista, pageable, lista.size());
         PageRender<Pelicula> pageRender = new PageRender<Pelicula>("/cpeliculas/peliculas", listado);
+        List<Actor> listadoActores = actoresService.buscarTodos();
+        model.addAttribute("idActor", idActor);
+        model.addAttribute("listadoActores", listadoActores);
         model.addAttribute("titulo", "Listado de peliculas por actor");
         model.addAttribute("origen", origen);
         model.addAttribute("listadoPeliculas", listado);

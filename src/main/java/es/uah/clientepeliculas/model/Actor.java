@@ -4,7 +4,7 @@ package es.uah.clientepeliculas.model;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import org.springframework.format.annotation.DateTimeFormat;
 
-import java.sql.Date;
+import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 
@@ -13,6 +13,7 @@ public class Actor {
     private Integer idActor;
     private String nombre;
     @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss", locale = "es-ES", timezone = "Europe/Madrid")
+
 
     private Date fechaNacimiento;
     private String paisNacimiento;

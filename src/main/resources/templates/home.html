@@ -1,8 +1,9 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html xmlns:th="http://www.thymeleaf.org" lang="es">
+<html xmlns:th="http://www.thymeleaf.org" lang="es"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8">
-    <title>Men&uacute; Principal</title>
+    <title>Menú Principal</title>
     <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
     <link th:href="@{/css/main.css}" rel="stylesheet" >
 </head>
@@ -19,7 +20,7 @@
                     </a>
                 </div>
             </div>
-            <div class="card">
+            <div class="card" sec:authorize="hasRole('ROLE_ADMIN')" >
                 <div class="card-body">
                     <h3 class="card-title">Actores</h3>
                     <a class="page-link" th:href="@{/cactores/actores?origen=home}">
@@ -27,15 +28,15 @@
                     </a>
                 </div>
             </div>
-            <div class="card">
+            <div class="card" sec:authorize="hasRole('ROLE_ADMIN')">
                 <div class="card-body">
-                    <h3 class="card-title">Busquedas</h3>
-                    <a class="page-link" th:href="@{/cpeliculas/buscarPeliculas?origen=home}">
-                        Buscar películas
+                    <h3 class="card-title">Usuarios</h3>
+                    <a class="page-link" th:href="@{/cusuarios/listado}">
+                        Listado de usuarios
                     </a>
+                </div>
             </div>
-        </div>
-    </div>
+         </div>
     </div>
 </body>
 </html>

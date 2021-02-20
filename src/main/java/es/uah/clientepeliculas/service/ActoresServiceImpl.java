@@ -16,7 +16,7 @@ import java.util.List;
 @Service
 public class ActoresServiceImpl implements es.uah.clientepeliculas.service.IActoresService {
 
-    String url = "http://localhost:8082/actores";
+    String url = "http://localhost:8090/api/zpeliculas/actores";
 
     @Autowired
     RestTemplate template;

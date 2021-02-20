@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">>
+<head>
+    <meta charset="UTF-8">
+    <title>Aplicación de gestión de peliculas</title>
+    <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+</head>
+<body>
+
+<div class="container">
+    <div class="panel-group">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                    <a data-toggle="collapse" href="#collapse1">Filtros búsqueda</a>
+                </h4>
+            </div>
+            <div id="collapse1" class="panel-collapse collapse">
+                <form th:action="@{/cusuarios/nombre}" method="get">
+                    <div class="mb-3">
+                        <label for="nombre" class="form-label">Nombre</label>
+                        <input type="text" class="form-control" id="nombre" th:value="${nombre}" name="nombre" placeholder="Escriba el nombre del usuario" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Buscar por Nombre</button>
+                    <input type="hidden" name="origen" value="listUsuarios" />
+                </form>
+                <form th:action="@{/cusuarios/correo}" method="get">
+                    <div class="mb-3">
+                        <label for="correo" class="form-label">Correo</label>
+                        <input type="text" class="form-control" id="correo" th:value="${correo}" name="correo" placeholder="Escriba el correo del usuario" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Buscar por Correo</button>
+                    <input type="hidden" name="origen" value="listUsuarios" />
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="card">
+        <h2 th:text="${titulo}" class="card-header"></h2>
+        <div class="card-body">
+            <div th:if="${msg != null}" class='alert alert-success' th:text="${msg}" role='alert'></div>
+           <!-- <h4 class="card-title">
+                <a th:href="@{/cusuarios/nuevo}" class="btn btn-primary btn-xs">Crear usuario nuevo</a>
+            </h4> -->
+            <table class="table table-hover">
+                <thead class="thead-light">
+                <tr>
+                    <th scope="col">Identificador</th>
+                    <th scope="col">Nombre</th>
+                    <th scope="col">Clave</th>
+                    <th scope="col">Correo</th>
+                    <th scope="col">Rol</th>
+                    <th scope="col">Acciones</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="usuario : ${listadoUsuarios}">
+                    <td th:text="ID+${usuario.idUsuario}"></td>
+                    <td th:text="${usuario.nombre}"></td>
+                    <td th:text="${usuario.clave}"></td>
+                    <td th:text="${usuario.correo}"></td>
+                    <td>
+                        <table>
+                            <tbody>
+                            <tr th:each="rol: ${usuario.roles}">
+                                <td th:text="${rol.authority}"></td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </td>
+                    <td sec:authorize="hasRole('ROLE_ADMIN')">
+                        <a th:href="@{/cusuarios/editar/{id}  (id=${usuario.idUsuario})  }" th:text="'editar'" class="btn btn-success btn-sm" role="button" title="Editar el usuario."><i class="fas fa-pencil-alt" aria-hidden="true"></i></a>
+                        <a th:href="@{/cusuarios/borrar/{id}  (id=${usuario.idUsuario})   }" th:text="'borrar'" onclick="return confirm('¿Estas seguro?')" class="btn btn-danger btn-sm" role="button" title="Eliminar el usuario."><i class="fas fa-trash" aria-hidden="true"></i></a>
+                    </td>
+                </tr>
+
+                </tbody>
+            </table>
+            <nav th:replace="paginator-nav :: paginator"></nav>
+            <a sec:authorize="hasRole('ROLE_ADMIN')" class="btn btn-primary" role="button" th:href="@{/cusuarios/nuevo}">Crear usuario nuevo</a>
+        </div>
+    </div>
+    <hr>
+    <a class="btn btn-secondary" role="button" th:href="@{/cpeliculas/}">Volver</a>
+</div> <!-- /container -->
+
+<!-- Bootstrap core JavaScript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script th:src="@{/js/bootstrap.min.js}"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+
+</body>
+</html>

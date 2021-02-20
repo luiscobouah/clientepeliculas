@@ -25,7 +25,7 @@ img{
 }
 /************************************** Globales ***************************************************/
 .contenedor{
-    max-width: 120rem; /* equivale 1200px */
+    max-width: 150rem; /* equivale 1200px */
     margin: 0 auto 0 auto;
 }
 h1{
@@ -124,59 +124,7 @@ h4{
 .opcion h3{
     text-transform: uppercase;
 }
-/******************** Nuevo circuito *************************************************/
-.nuevoCircuito {
-    display: flex;
-    justify-content: center;
 
-}
-.nuevoCircuito form {
-    text-align: left;
-    width:400px;
-}
-.nuevoCircuito form input {
-    right: 0rem;
-}
-
-/***************** Nuevo coche *****************************************************/
-.nuevoCoche {
-    display: flex;
-    justify-content: center;
-
-}
-.nuevoCoche form {
-    text-align: left;
-    width:400px;
-}
-.nuevoCoche form input {
-    right: 0rem;
-}
-/***************** Calcular ganancia *****************************************************/
-.calcularGanancia {
-    text-align: center;
-}
-.selectDiv{
-    text-align: center;
-}
-.selectDiv select{
-    width: 50%;
-    cursor: pointer;
-    padding: 7px 10px;
-    height: 42px;
-    border-radius: 6px;
-    font-size: 1em;
-    position: relative;
-    transition: all 0.25s ease;
-    margin-top: 1rem;
-    text-align: center;
-}
-/***************** Resultado Ganancia *****************************************************/
-.resultadoGancia {
-    display: flex;
-    justify-content: center;
-    font-size: 3rem;
-    margin-top: 1rem;
-    color: #2A6BAD;
-
-
+.checked {
+    color: orange;
 }
