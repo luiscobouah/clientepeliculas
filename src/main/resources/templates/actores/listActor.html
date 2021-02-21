@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <title>Aplicación de gestión de películas</title>
-    <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <link th:href="@{/css/main.css}" rel="stylesheet" >
 </head>
 <body>
-
 <div class="container py-4">
     <div class="card">
         <h2 th:text="${titulo}" class="card-header"></h2>
@@ -24,7 +24,7 @@
                 </thead>
                 <tbody>
                 <tr th:each="actor : ${listadoActores}">
-                    <td th:text="AC+${actor.idActor}"></td>
+                    <td th:text="ID+${actor.idActor}"></td>
                     <td th:text="${actor.nombre}"></td>
                     <td th:text="${actor.fechaNacimiento}"></td>
                     <td th:text="${actor.paisNacimiento}"></td>
@@ -36,14 +36,13 @@
 
                 </tbody>
             </table>
-
             <nav th:replace="paginator-nav :: paginator"></nav>
-            <a class="btn btn-primary" role="button" th:href="@{/cactores/nuevoActor}">Nuevo actor</a>
-
+        </div>
+        <div class="botonera">
+            <a class="btn boton primario" role="button" th:href="@{/cactores/nuevoActor}">Nuevo actor</a>
+            <a class="btn boton secundario" role="button" th:href="${'home'}">Volver</a>
         </div>
     </div>
-    <hr>
-    <a class="btn btn-secondary" role="button" th:href="${origen}">Volver</a>
 </div> <!-- /container -->
 
 <!-- Bootstrap core JavaScript

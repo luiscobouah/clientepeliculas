@@ -2,9 +2,8 @@ package es.uah.clientepeliculas.model;
 
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import org.springframework.format.annotation.DateTimeFormat;
 
-import java.util.Date;
+import java.sql.Date;
 import java.util.List;
 import java.util.Objects;
 

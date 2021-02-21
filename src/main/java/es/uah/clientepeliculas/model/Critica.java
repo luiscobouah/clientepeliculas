@@ -15,6 +15,7 @@ public class Critica implements Serializable {
     private Date fecha;
 
     private Usuario usuario;
+    private Pelicula pelicula;
 
     public Critica() {
     }
@@ -74,6 +75,14 @@ public class Critica implements Serializable {
 
     public void setUsuario(Usuario usuario) {
         this.usuario = usuario;
+    }
+
+    public Pelicula getPelicula() {
+        return pelicula;
+    }
+
+    public void setPelicula(Pelicula pelicula) {
+        this.pelicula = pelicula;
     }
 
     @Override

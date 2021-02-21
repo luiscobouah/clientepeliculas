@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <title>Aplicación de gestión de peliculas</title>
     <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <link th:href="@{/css/main.css}" rel="stylesheet" >
 </head>
 <body>
 
@@ -73,14 +75,15 @@
                         </div>
                     </li>
                 </ul>
-                <button type="submit" class="btn btn-primary">Guardar</button>
-                <input type="hidden" th:field="*{idPelicula}" />
-                <input type="hidden" th:field="*{imagen}"/>
+                <div class="botonera">
+                    <button type="submit" class="btn boton primario">Guardar</button>
+                    <a class="btn boton cancelar" role="button" href="javascript:history.back()">Cancelar</a>
+                    <input type="hidden" th:field="*{idPelicula}" />
+                    <input type="hidden" th:field="*{imagen}"/>
+                </div>
             </form>
         </div>
     </div>
-    <hr>
-    <a class="btn btn-secondary" role="button" href="javascript:history.back()">Volver</a>
 </div>
 
 <!-- Bootstrap core JavaScript

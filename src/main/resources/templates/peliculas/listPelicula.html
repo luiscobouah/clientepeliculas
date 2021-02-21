@@ -4,8 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <title>Aplicación de gestión de películas</title>
-    <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <link th:href="@{/css/main.css}" rel="stylesheet" >
 </head>
 <body>
 
@@ -18,42 +18,49 @@
                 </h4>
             </div>
             <div id="collapse1" class="panel-collapse collapse">
-                <form th:action="@{/cpeliculas/titulo}" method="get">
-                    <div class="mb-3">
-                        <label for="tituloPel" class="form-label">Título</label>
-                        <input type="text" class="form-control" id="tituloPel" th:value="${tituloPel}" name="tituloPel" placeholder="Escriba el título de la pelicula" required>
+                <div class="row">
+                    <div class="col-xs-12 col-sm-4">
+                        <form th:action="@{/cpeliculas/titulo}" method="get">
+                            <div class="mb-3">
+                                <label for="tituloPel" class="form-label">Título</label>
+                                <input type="text" class="form-control" id="tituloPel" th:value="${tituloPel}" name="tituloPel" placeholder="Escriba el título de la pelicula" required>
+                            </div>
+                            <button type="submit" class="btn btn-link">Buscar por Título</button>
+                            <input type="hidden" name="origen" value="listPeliculas" />
+                        </form>
                     </div>
-                    <button type="submit" class="btn btn-primary">Buscar por Título</button>
-                    <input type="hidden" name="origen" value="listPeliculas" />
-                </form>
-                <hr>
-                <form th:action="@{/cpeliculas/genero}" method="get">
-                    <div class="mb-3">
-                        <select class="form-select" name="genero" id="genero" required>
-                            <option hidden  selected>Selecciona un género</option>
-                            <option th:value="Infantil">Infantil</option>
-                            <option th:value="Drama">Drama</option>
-                            <option th:value="Suspenso">Suspenso</option>
-                            <option th:value="Terror">Terror</option>
-                            <option th:value="Acción">Acción</option>
-                            <option th:value="Comedia">Comedia</option>
-                        </select>
-                     </div>
-                    <button type="submit" class="btn btn-primary">Buscar por Género</button>
-                    <input type="hidden" name="origen"  value="listPeliculas" />
-                </form>
-                <hr>
-                <form th:action="@{/cpeliculas/actor}" method="get">
-                    <div class="mb-3">
-                        <select class="form-select" name="idActor" id="idActor" required>
-                            <option hidden value="0" selected>Selecciona un actor</option>
-                            <option th:each="var : ${listadoActores}" th:value="${var.idActor}" th:text="${var.nombre}"></option>
-                        </select>
+                    <div class="col-xs-12 col-sm-4">
+                        <form class="form-filtros" th:action="@{/cpeliculas/genero}" method="get">
+                            <label for="tituloPel" class="form-label">Género</label>
+                            <div class="mb-3">
+                                <select class="form-select" name="genero" id="genero" required>
+                                    <option hidden  selected>Selecciona un género</option>
+                                    <option th:value="Infantil">Infantil</option>
+                                    <option th:value="Drama">Drama</option>
+                                    <option th:value="Suspenso">Suspenso</option>
+                                    <option th:value="Terror">Terror</option>
+                                    <option th:value="Acción">Acción</option>
+                                    <option th:value="Comedia">Comedia</option>
+                                </select>
+                             </div>
+                            <button type="submit" class="btn btn-link">Buscar por Género</button>
+                            <input type="hidden" name="origen"  value="listPeliculas" />
+                        </form>
                     </div>
-                    <button type="submit" class="btn btn-primary">Buscar por Actor</button>
-                    <input type="hidden" name="origen" id="origen" value="listPeliculas" />
-                </form>
-                <hr>
+                    <div class="col-xs-12 col-sm-4">
+                        <form th:action="@{/cpeliculas/actor}" method="get">
+                            <label for="tituloPel" class="form-label">Actor</label>
+                            <div class="mb-3">
+                                <select class="form-select" name="idActor" id="idActor" required>
+                                    <option hidden value="0" selected>Selecciona un actor</option>
+                                    <option th:each="var : ${listadoActores}" th:value="${var.idActor}" th:text="${var.nombre}"></option>
+                                </select>
+                            </div>
+                            <button type="submit" class="btn btn-link">Buscar por Actor</button>
+                            <input type="hidden" name="origen" id="origen" value="listPeliculas" />
+                        </form>
+                    </div>
+                </div>
             </div>
         </div>
      </div>
@@ -76,7 +83,7 @@
                 </thead>
                 <tbody>
                 <tr th:each="pelicula : ${listadoPeliculas}">
-                    <td th:text="PE+${pelicula.idPelicula}"></td>
+                    <td th:text="ID+${pelicula.idPelicula}"></td>
                     <td th:text="${pelicula.titulo}"></td>
                     <td th:text="${pelicula.annio}"></td>
                     <td th:text="${pelicula.duracion}"></td>
@@ -93,11 +100,12 @@
                 </tbody>
             </table>
             <nav th:replace="paginator-nav :: paginator"></nav>
-            <a sec:authorize="hasRole('ROLE_ADMIN')" class="btn btn-primary" role="button" th:href="@{/cpeliculas/nuevaPelicula}">Nueva película</a>
+        </div>
+        <div class="botonera">
+            <a sec:authorize="hasRole('ROLE_ADMIN')" class="btn boton primario" role="button" th:href="@{/cpeliculas/nuevaPelicula}">Nueva película</a>
+            <a class="btn boton secundario" role="button" th:href="${'home'}">Volver</a>
         </div>
     </div>
-    <hr>
-    <a class="btn btn-secondary" role="button" th:href="${'home'}">Volver</a>
 </div> <!-- /container -->
 
 <!-- Bootstrap core JavaScript

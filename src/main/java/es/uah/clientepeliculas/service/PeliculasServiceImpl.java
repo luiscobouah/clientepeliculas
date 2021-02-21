@@ -29,21 +29,21 @@ public class PeliculasServiceImpl implements es.uah.clientepeliculas.service.IPe
     @Override
     public Page<Pelicula> buscarTodas(Pageable pageable) {
         Pelicula[] peliculas = template.getForObject(url, Pelicula[].class);
-        List<Pelicula> cursosList = Arrays.asList(peliculas);
+        List<Pelicula> peliculasList = Arrays.asList(peliculas);
 
         int pageSize = pageable.getPageSize();
         int currentPage = pageable.getPageNumber();
         int startItem = currentPage * pageSize;
         List<Pelicula> list;
 
-        if (cursosList.size() < startItem) {
+        if (peliculasList.size() < startItem) {
             list = Collections.emptyList();
         } else {
-            int toIndex = Math.min(startItem + pageSize, cursosList.size());
-            list = cursosList.subList(startItem, toIndex);
+            int toIndex = Math.min(startItem + pageSize, peliculasList.size());
+            list = peliculasList.subList(startItem, toIndex);
         }
 
-        Page<Pelicula> page = new PageImpl<>(list, PageRequest.of(currentPage, pageSize), cursosList.size());
+        Page<Pelicula> page = new PageImpl<>(list, PageRequest.of(currentPage, pageSize), peliculasList.size());
         return page;
     }
 
@@ -59,6 +59,18 @@ public class PeliculasServiceImpl implements es.uah.clientepeliculas.service.IPe
         List<Pelicula> lista = Arrays.asList(peliculas);
         Page<Pelicula> page = new PageImpl<>(lista, pageable, lista.size());
         return page;
+    }
+    @Override
+    public Pelicula buscarPeliculaPorTitulo(String titulo) {
+        Pelicula[] peliculas = template.getForObject(url + "/titulo/" + titulo, Pelicula[].class);
+        List<Pelicula> lista = Arrays.asList(peliculas);
+
+        if (lista.size() == 0 ){
+            return null;
+        } else {
+            return lista.get(0);
+        }
+
     }
 
     @Override

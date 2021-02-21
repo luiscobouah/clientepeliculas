@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="es"
-      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">>
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8">
     <title>Aplicación de gestión de peliculas</title>
-    <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <link th:href="@{/css/main.css}" rel="stylesheet" >
 </head>
 <body>
 
@@ -18,22 +18,28 @@
                 </h4>
             </div>
             <div id="collapse1" class="panel-collapse collapse">
-                <form th:action="@{/cusuarios/nombre}" method="get">
-                    <div class="mb-3">
-                        <label for="nombre" class="form-label">Nombre</label>
-                        <input type="text" class="form-control" id="nombre" th:value="${nombre}" name="nombre" placeholder="Escriba el nombre del usuario" required>
+                <div class="row">
+                    <div class="col-xs-12 col-sm-6">
+                        <form th:action="@{/cusuarios/nombre}" method="get">
+                            <div class="mb-3">
+                                <label for="nombre" class="form-label">Nombre</label>
+                                <input type="text" class="form-control" id="nombre" th:value="${nombre}" name="nombre" placeholder="Escriba el nombre del usuario" required>
+                            </div>
+                            <button type="submit" class="btn btn-link">Buscar por Nombre</button>
+                            <input type="hidden" name="origen" value="listUsuarios" />
+                        </form>
                     </div>
-                    <button type="submit" class="btn btn-primary">Buscar por Nombre</button>
-                    <input type="hidden" name="origen" value="listUsuarios" />
-                </form>
-                <form th:action="@{/cusuarios/correo}" method="get">
-                    <div class="mb-3">
-                        <label for="correo" class="form-label">Correo</label>
-                        <input type="text" class="form-control" id="correo" th:value="${correo}" name="correo" placeholder="Escriba el correo del usuario" required>
+                    <div class="col-xs-12 col-sm-6">
+                        <form th:action="@{/cusuarios/correo}" method="get">
+                            <div class="mb-3">
+                                <label for="correo" class="form-label">Correo</label>
+                                <input type="text" class="form-control" id="correo" th:value="${correo}" name="correo" placeholder="Escriba el correo del usuario" required>
+                            </div>
+                            <button type="submit" class="btn btn-link">Buscar por Correo</button>
+                            <input type="hidden" name="origen" value="listUsuarios" />
+                        </form>
                     </div>
-                    <button type="submit" class="btn btn-primary">Buscar por Correo</button>
-                    <input type="hidden" name="origen" value="listUsuarios" />
-                </form>
+                </div>
             </div>
         </div>
     </div>
@@ -80,11 +86,12 @@
                 </tbody>
             </table>
             <nav th:replace="paginator-nav :: paginator"></nav>
-            <a sec:authorize="hasRole('ROLE_ADMIN')" class="btn btn-primary" role="button" th:href="@{/cusuarios/nuevo}">Crear usuario nuevo</a>
+        </div>
+        <div class="botonera">
+            <a class="btn boton primario" role="button" th:href="@{/cusuarios/nuevo}">Nuevo usuario</a>
+            <a class="btn boton secundario" role="button" th:href="@{/cpeliculas/}">Volver</a>
         </div>
     </div>
-    <hr>
-    <a class="btn btn-secondary" role="button" th:href="@{/cpeliculas/}">Volver</a>
 </div> <!-- /container -->
 
 <!-- Bootstrap core JavaScript

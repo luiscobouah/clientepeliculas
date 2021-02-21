@@ -13,7 +13,10 @@ public interface ICriticasService {
 
     Page<Critica> buscarCriticasPorIdPelicula(Integer idPelicula, Pageable pageable);
 
+    Page<Critica> buscarCriticasPorIdUsuario(Integer idUsuario, Pageable pageable);
+
     List<Critica> buscarCriticasPorIdPelicula(Integer idPelicula);
+
 
     Critica buscarCriticaPorId(Integer idCritica);
 

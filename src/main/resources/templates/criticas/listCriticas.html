@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <title>Aplicación de gestión de peliculas</title>
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <link th:href="@{/css/main.css}" rel="stylesheet" >
+</head>
+<body>
+<div class="container">
+    <div class="panel-group">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                    <a data-toggle="collapse" href="#collapse1">Filtros búsqueda</a>
+                </h4>
+            </div>
+            <div id="collapse1" class="panel-collapse collapse">
+                <form th:action="@{/ccriticas/pelicula}" method="get" class="form-filtrs-critica">
+
+                        <label for="pelicula" class="form-label">Película</label>
+                        <input type="text" class="form-control" id="pelicula" th:value="${pelicula}" name="pelicula" placeholder="Escriba el nombre de la pelicula" required>
+
+                    <button type="submit" class="btn btn-link">Buscar por Nombre</button>
+                    <input type="hidden" name="origen" value="listCriticas"/>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="card">
+        <h2 th:text="${titulo}" class="card-header"></h2>
+        <div class="card-body">
+            <div th:if="${msg != null}" class='alert alert-success' th:text="${msg}" role='alert'></div>
+            <table class="table table-hover">
+                <thead class="thead-light">
+                <tr>
+                    <th scope="col">Identificar</th>
+                    <th scope="col">Película</th>
+                    <th scope="col">Valoración</th>
+                    <th scope="col">Nota</th>
+                    <th scope="col">Fecha</th>
+                    <th scope="col">Acciones</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="critica : ${listadoCriticas}">
+                    <td th:text="ID+${critica.idCritica}"></td>
+                    <td th:text="${critica.pelicula.titulo}"></td>
+                    <td th:text="${critica.valoracion}"></td>
+                    <td th:text="${critica.nota}"></td>
+                    <td th:text="${critica.fecha}"></td>
+                    <td>
+                        <a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/ccriticas/borrar/{id}  (id=${critica.idCritica})   }" th:text="'borrar'" onclick="return confirm('¿Estas seguro?')" class="btn btn-danger btn-sm" role="button" title="Eliminar el usuario."><i class="fas fa-trash" aria-hidden="true"></i></a>
+                    </td>
+                </tr>
+
+                </tbody>
+            </table>
+            <nav th:replace="paginator-nav :: paginator"></nav>
+        </div>
+        <div class="botonera">
+            <a class="btn boton secundario" role="button" th:href="@{/cpeliculas/}">Volver</a>
+        </div>
+    </div>
+</div> <!-- /container -->
+
+<!-- Bootstrap core JavaScript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script th:src="@{/js/bootstrap.min.js}"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+
+</body>
+</html>

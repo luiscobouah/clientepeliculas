@@ -6,6 +6,7 @@
     <title>Aplicación de gestión de peliculas</title>
     <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link th:href="@{/css/main.css}" rel="stylesheet" >
 </head>
 <body>
 
@@ -17,7 +18,7 @@
                  style="max-width: 25%;" th:src="@{'/cpeliculas/uploads/' + ${pelicula.imagen}}"
                  th:alt="${pelicula.imagen}" />
             <ul class="list-group">
-                <li class="list-group-item active" th:text="'ID: ' +'PE'+${pelicula.idPelicula}"></li>
+                <li class="list-group-item active" th:text="'ID:'+${pelicula.idPelicula}"></li>
                 <li class="list-group-item" th:text="'Valoración media: '+${notaMedia}"></li>
                 <li class="list-group-item" th:text="'Título: '+${pelicula.titulo}"></li>
                 <li class="list-group-item" th:text="'Año: '+${pelicula.annio}"></li>
@@ -44,19 +45,19 @@
                             <td th:text="${critica.fecha}"></td>
                             <td>
                                 <!--<a sec:authorize="hasRole('ROLE_USER')" th:href="@{/ccriticas/editar/{id}  (id=${critica.idCritica})  }" th:text="'editar'" class="btn btn-success btn-sm" role="button" title="Editar la película."><i class="fas fa-pencil-alt" aria-hidden="true"></i></a> -->
-                                <a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/ccriticas/borrar/{id}  (id=${critica.idCritica})   }" th:text="'borrar'" onclick="return confirm('¿Estas seguro?')" class="btn btn-danger btn-sm" role="button" title="Eliminar la crítica."><i class="fas fa-trash" aria-hidden="true"></i></a>
+                                <a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/ccriticas/borrar/{id}  (id=${critica.idCritica})   }" th:text="'borrar'" onclick="return confirm('¿Estas seguro?')" class="btn btn-danger btn-xs" role="button" title="Eliminar la crítica."><i class="fas fa-trash" aria-hidden="true"></i></a>
                             </td>
                         </tr>
                         </tbody>
                     </table>
                 </li>
             </ul>
-
         </div>
     </div>
-    <hr>
-    <a class="btn btn-secondary" role="button" href="javascript:history.back()">Volver</a>
-    <a sec:authorize="hasRole('ROLE_USER')" class="btn btn-primary" role="button" th:href="@{/ccriticas/nueva/{idPelicula}  (idPelicula=${pelicula.idPelicula})}">Nueva crítica</a>
+    <div class="botonera">
+        <a sec:authorize="hasRole('ROLE_USER')" class="btn boton primario" role="button" th:href="@{/ccriticas/nueva/{idPelicula}  (idPelicula=${pelicula.idPelicula})}">Nueva crítica</a>
+        <a class="btn boton secundario" role="button" href="javascript:history.back()">Volver</a>
+    </div>
 </div>
 
 </body>

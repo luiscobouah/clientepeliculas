@@ -18,6 +18,7 @@ body{
     font-family: Arial, Helvetica, sans-serif;
     font-size: 1.6rem;
     line-height: 2;
+    padding-top: 3rem;
 }
 img{
     max-width: 30%;
@@ -42,89 +43,55 @@ h4{
     font-size: 2.6rem;
 }
 
-.formulario{
-
-}
-
-.campoFormulario{
-    display: grid;
-    width: 100%;
-    margin-top: 2px;
-    margin-bottom: 0px;
-}
-.campoFormulario input{
-    width: 100%;
-    border-radius: 6px;
-
-}
-/**************************************** Utilidades ***************************************************/
-.seccion{
-    margin-top: 2rem;
-    margin-bottom: 2rem;
-}
-.fw-300{
-    font-weight: 300;
-}
-.centrar-texto{
-    text-align: center;
-}
-.d-block{
-    display: block!important; /* se utiliza para que funcione a pesar de no ser el ultimo en la hoja*/
-}
-
-.contenido-centrado{
-    max-width: 80rem;
-
-}
 
 /**************************************** Botones *******************************************************/
+.botonera {
+    margin-bottom: 5rem;
+}
 
 .boton{
     color: white;
-    font-weight: 700;
+    font-weight: 500;
     text-decoration: none;
-    font-size: 1.8rem;
+    font-size: 1.5rem;
     padding: 1rem 3rem;
     display: inline-block;
     margin-top: 3rem;
+    margin-right: 5rem;
+    margin-left: 5rem;
     text-align: center;
     border: none;
+    border-radius: 0.5rem;
+}
+.primario {
+    float: left;
     background-color: #2A6BAD;
-    border-radius: 3rem;
 }
-
-/************************************ Header **************************************************/
-.site-header {
-    color: white;
-    padding: 1rem 0 3rem 0;
-    /*background-image: url(../img/cabecera.jpg);*/
-    background-position: center center;
-    background-size: cover;
-    height: 35rem;
+.secundario {
+    float: right;
+    background-color: #9b9b9b;
 }
-
-.site-header h1 {
-    font-size: 6rem;
-}
-/********************** Opciones *******************************************************/
-.opciones{
-    display: flex;
-    justify-content: space-between;
-}
-.opcion{
-    flex-basis: calc(33.3% - 1rem);
-    text-align: center;
-    position: relative
-}
-.opcion img {
-    width:400px;
-    height:380px;
-}
-
-.opcion h3{
-    text-transform: uppercase;
+.cancelar {
+    float: right;
+    background-color: #d22c21;
 }
 
 .checked {
     color: orange;
+}
+
+/************************ Buscadores *************************************/
+
+.form-select {
+    height: 3.4rem;
+    border-radius: 0.3rem;
+    border-color: #6c757d;
+}
+.form-filtrs-critica {
+    width: 30%;
+}
+
+/*********************** Formularios *****************************************/
+.check-usuarios {
+    padding-left: 1rem;
 }

@@ -74,6 +74,26 @@ public class CriticasServiceImpl implements ICriticasService {
         return page;
     }
 
+    @Override
+    public Page<Critica> buscarCriticasPorIdUsuario(Integer idUsuario, Pageable pageable) {
+        Critica[] criticas = template.getForObject(url+"/usuario/"+idUsuario, Critica[].class);
+        List<Critica> criticaList = Arrays.asList(criticas);
+
+        int pageSize = pageable.getPageSize();
+        int currentPage = pageable.getPageNumber();
+        int startItem = currentPage * pageSize;
+        List<Critica>list;
+
+        if(criticaList.size() <startItem) {
+            list = Collections.emptyList();
+        } else {
+            int toIndex = Math.min(startItem + pageSize, criticaList.size());
+            list = criticaList.subList(startItem, toIndex);
+        }
+        Page<Critica> page = new PageImpl<>(list, PageRequest.of(currentPage, pageSize), criticaList.size());
+        return page;
+    }
+
     public List<Critica> buscarCriticasPorIdPelicula(Integer idPelicula) {
         Critica[] criticas = template.getForObject(url+"/pelicula/"+idPelicula, Critica[].class);
         return Arrays.asList(criticas);

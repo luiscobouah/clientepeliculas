@@ -9,7 +9,8 @@
 </head>
 <body>
     <div class="contenedor seccion">
-        <h1 class="text-center">Gestión de Películas</h1>
+        <h1 sec:authorize="hasRole('ROLE_ADMIN')" class="text-center">Gestión de Películas</h1>
+        <h1 sec:authorize="hasRole('ROLE_USER')" class="text-center">Videoteca</h1>
         <hr>
         <div class="card-group">
             <div class="card">
@@ -33,6 +34,14 @@
                     <h3 class="card-title">Usuarios</h3>
                     <a class="page-link" th:href="@{/cusuarios/listado}">
                         Listado de usuarios
+                    </a>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-body">
+                    <h3 class="card-title">Críticas</h3>
+                    <a class="page-link" th:href="@{/ccriticas/listado?origen=home}">
+                        Listado películas
                     </a>
                 </div>
             </div>

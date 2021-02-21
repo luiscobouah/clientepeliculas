@@ -8,7 +8,6 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -53,7 +52,9 @@ public class UsuariosServiceImpl implements IUsuariosService {
     public Page<Usuario> buscarUsuarioPorNombre(String nombre, Pageable pageable) {
         Usuario usuario = template.getForObject(url+"/nombre/"+nombre, Usuario.class);
         List<Usuario> usuariosList = new ArrayList();
-        usuariosList.add(usuario);
+        if (usuario != null){
+            usuariosList.add(usuario);
+        }
         int pageSize = pageable.getPageSize();
         int currentPage = pageable.getPageNumber();
         int startItem = currentPage * pageSize;
@@ -80,7 +81,9 @@ public class UsuariosServiceImpl implements IUsuariosService {
     public Page<Usuario> buscarUsuarioPorCorreo(String correo, Pageable pageable) {
         Usuario usuario = template.getForObject(url+"/correo/"+correo, Usuario.class);
         List<Usuario> usuariosList = new ArrayList();
-        usuariosList.add(usuario);
+        if (usuario != null){
+            usuariosList.add(usuario);
+        }
         int pageSize = pageable.getPageSize();
         int currentPage = pageable.getPageNumber();
         int startItem = currentPage * pageSize;
